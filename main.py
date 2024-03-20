@@ -4,6 +4,10 @@ import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from pprint import pprint
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # User inputs the year they'd like to travel to in YYYY-MM-DD format
 date_string = input("Please enter the year you would like to travel to in YYYY-MM-DD format: ")
@@ -18,8 +22,8 @@ songs = soup.find_all('h3', class_='a-no-trucate', limit=100)
 song_titles = [song.get_text(strip=True) for song in songs]
 
 # Authenticate with Spotify
-client_id = ''
-client_secret = ''
+client_id = os.getenv('SPOTIFY_CLIENT_ID')
+client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
 redirect_uri = 'http://example.com'
 scope = 'playlist-modify-private'
 
